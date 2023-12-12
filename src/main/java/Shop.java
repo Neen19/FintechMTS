@@ -15,8 +15,10 @@ public class Shop {
     private double discount;
 
     public Shop(int amount, double price, double discount) {
-        if (amount < 0 || price < 0 || discount < 0 || discount > 100)
-            throw new IllegalArgumentException();
+        if (amount < 0) throw new IllegalArgumentException("amount must be natural number");
+        if (price < 0) throw new IllegalArgumentException("price must be natural number");
+        if (discount < 0 || discount > 100)
+            throw new IllegalArgumentException("discount must be more than 0 and less than 100");
         this.amount = amount;
         this.price = price;
         this.discount = discount;

@@ -11,9 +11,9 @@ public class Main {
     }
 
     public static void printPurchasePrice(Shop shop) {
-        System.out.printf("Purchase price without discount: %.2f\n",
-                shop.getPrice() * shop.getAmount());
-        System.out.printf("Purchase price without discount: %.2f\n\n",
-                shop.getPrice() * shop.getAmount() * ((100.0 - shop.getDiscount()) / 100.0));
+        double defoltFullPrice = shop.getPrice() * shop.getAmount();
+        double discountFullPrice = shop.getPrice() * shop.getAmount() * ((100.0 - shop.getDiscount()) / 100.0);
+        System.out.printf("Purchase price without discount: %.2f\n", defoltFullPrice);
+        System.out.printf("Purchase price with discount: %.2f\n\n",discountFullPrice);
     }
 }
