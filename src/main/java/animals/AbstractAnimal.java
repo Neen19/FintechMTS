@@ -1,6 +1,7 @@
 package main.java.animals;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 
 public abstract class AbstractAnimal implements Animal {

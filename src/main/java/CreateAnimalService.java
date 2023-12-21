@@ -5,9 +5,9 @@ import main.java.animals.pets.Cat;
 import main.java.animals.pets.Dog;
 import main.java.animals.predators.Shark;
 import main.java.animals.predators.Wolf;
+import main.java.animals.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Random;
 
 public interface CreateAnimalService {
 
@@ -34,7 +34,7 @@ public interface CreateAnimalService {
             InvocationTargetException,
             InstantiationException,
             IllegalAccessException {
-        int classCase = new Random().nextInt(classes.length);
+        int classCase = RandomUtils.random.nextInt(classes.length);
         return classes[classCase].getDeclaredConstructor().newInstance();
     }
 
@@ -52,7 +52,8 @@ public interface CreateAnimalService {
             NoSuchMethodException,
             InstantiationException,
             IllegalAccessException {
-        for (int i = 0; i < 10; i++) {
+        int i = 0;
+        while (i++ < 10) {
             AbstractAnimal animal = genRandomClass(ANIMAL_CLASSES);
             System.out.println(animal);
         }
