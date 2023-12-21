@@ -8,14 +8,15 @@ import main.java.animals.predators.Wolf;
 import main.java.animals.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public interface CreateAnimalService {
 
     /**
      * Массив реализованных классов наследников AbstrctAnimal
      */
-    Class<? extends AbstractAnimal>[] ANIMAL_CLASSES =
-            new Class[]{Shark.class, Dog.class, Cat.class, Wolf.class};
+    List<Class<? extends AbstractAnimal>> ANIMAL_CLASSES =
+            List.of(Shark.class, Dog.class, Cat.class, Wolf.class);
 
     /**
      * Функция которая создаёт случайный экземпляр из vararg
@@ -29,13 +30,13 @@ public interface CreateAnimalService {
      * @throws IllegalAccessException
      */
 
-    default AbstractAnimal genRandomClass(Class<? extends AbstractAnimal>... classes) throws
+    default AbstractAnimal genRandomClass(List<Class<? extends AbstractAnimal>> classes) throws
             NoSuchMethodException,
             InvocationTargetException,
             InstantiationException,
             IllegalAccessException {
-        int classCase = RandomUtils.random.nextInt(classes.length);
-        return classes[classCase].getDeclaredConstructor().newInstance();
+        int index = RandomUtils.genRandomInt(classes.size());
+        return classes.get(index).getDeclaredConstructor().newInstance();
     }
 
     /**

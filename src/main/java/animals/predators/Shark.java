@@ -5,8 +5,6 @@ import main.java.animals.enums.RandomEnumGenerator;
 import main.java.animals.enums.breeds.SharkBreeds;
 import main.java.animals.utils.RandomUtils;
 
-import java.util.Random;
-
 public class Shark extends Predator {
 
     public Shark() {
