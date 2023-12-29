@@ -1,4 +1,4 @@
-package main.java.animals.enums;
+package animals.enums;
 
 public enum AnimalNames {
     EMILY, ALEXANDR, SOFIA, ISABELLA, LIAM

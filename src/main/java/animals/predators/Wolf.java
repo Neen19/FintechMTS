@@ -1,9 +1,9 @@
-package main.java.animals.predators;
+package animals.predators;
 
-import main.java.animals.enums.AnimalNames;
-import main.java.animals.enums.RandomEnumGenerator;
-import main.java.animals.enums.breeds.WolfBreeds;
-import main.java.animals.utils.RandomUtils;
+import animals.enums.AnimalNames;
+import animals.enums.RandomEnumGenerator;
+import animals.enums.breeds.WolfBreeds;
+import animals.utils.RandomUtils;
 
 
 public class Wolf extends Predator {

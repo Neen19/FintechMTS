@@ -1,9 +1,9 @@
-package main.java.animals.pets;
+package animals.pets;
 
-import main.java.animals.enums.AnimalNames;
-import main.java.animals.enums.RandomEnumGenerator;
-import main.java.animals.enums.breeds.CatBreeds;
-import main.java.animals.utils.RandomUtils;
+import animals.enums.AnimalNames;
+import animals.enums.RandomEnumGenerator;
+import animals.enums.breeds.CatBreeds;
+import animals.utils.RandomUtils;
 
 
 public class Cat extends Pet {

@@ -1,6 +1,7 @@
-package main.java.animals;
+package animals;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public interface Animal {
     String getBreed();
@@ -10,4 +11,7 @@ public interface Animal {
     BigDecimal getCost();
 
     String getCharacter();
+
+    LocalDate getBirthDate();
+
 }
