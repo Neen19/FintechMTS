@@ -13,11 +13,11 @@ public class Main {
 
         AbstractAnimal[] animals = createService.genAnimals(predatorAnimalFactory);
 
-
         for (AbstractAnimal animal : animals) {
             System.out.println(animal + "\n");
         }
 
+        System.out.println("FIND DUPLICATE RESULT");
         searchService.findDuplicate(animals);
 
         System.out.println("FIND OLDER ANIMAL RESULT");
@@ -34,7 +34,6 @@ public class Main {
             if (result == null) break;
             System.out.println(result);
         }
-
     }
 }
 

@@ -25,22 +25,29 @@ public class SearchServiceImpl implements SearchService {
         AbstractAnimal[] answer = new AbstractAnimal[animals.length];
         int ind = 0;
         for (AbstractAnimal animal : animals) {
-            System.out.println(animal.getName());
-            System.out.println(LocalDate.now().getYear() - animal.getBirthDate().getYear());
-            if ((LocalDate.now().getYear() - animal.getBirthDate().getYear()) > age){
-                answer[ind++] = animal;
-            }
+            LocalDate animalBirth = animal.getBirthDate();
+            LocalDate now = LocalDate.now();
+            int animalAge = now.getYear() - animalBirth.getYear();
+            if (animalBirth.getMonthValue() > now.getMonthValue()) animalAge--;
+            if (animalAge >= age) answer[ind++] = animal;
         }
         return answer;
     }
 
+
     @Override
-    public void findDuplicate(AbstractAnimal[] animals) {
+    public AbstractAnimal[] findDuplicate(AbstractAnimal[] animals) {
+        AbstractAnimal[] res = new AbstractAnimal[animals.length];
+        int ind = 0;
         Set<AbstractAnimal> set = new HashSet<>();
         for (AbstractAnimal animal : animals) {
-            if (set.contains(animal)) System.out.println(animal);
-            else set.add(animal);
+            if (set.contains(animal)) {
+                res[ind++] = animal;
+            }
+            set.add(animal);
         }
+        System.out.println(set);
+        return res;
     }
 
 }

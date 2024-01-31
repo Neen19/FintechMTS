@@ -1,14 +1,15 @@
 package animals.utils;
 
-import animals.AbstractAnimal;
-
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
 public class RandomUtils {
+    public static void main(String[] args) {
+        System.out.println(new BigDecimal(123.1).equals(new BigDecimal(123.1)));
+    }
     private static final Random random = new Random();
 
     public static String genPrice() {

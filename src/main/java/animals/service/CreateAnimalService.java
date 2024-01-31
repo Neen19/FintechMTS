@@ -2,7 +2,6 @@ package animals.service;
 
 import animals.AbstractAnimal;
 import animals.factories.AbstractAnimalFactory;
-import animals.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
 

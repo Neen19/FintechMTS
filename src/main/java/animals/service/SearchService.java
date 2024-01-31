@@ -2,6 +2,8 @@ package animals.service;
 
 import animals.AbstractAnimal;
 
+import java.util.Set;
+
 public interface SearchService {
 
     /** Функция которая возвращает массив имён животных,
@@ -24,5 +26,9 @@ public interface SearchService {
      * @param animals
      */
 
-    void findDuplicate(AbstractAnimal[] animals);
+    AbstractAnimal[] findDuplicate(AbstractAnimal[] animals);
+
+    default void printDuplicate(AbstractAnimal[] animals) {
+        System.out.println(findDuplicate(animals));
+    }
 }
