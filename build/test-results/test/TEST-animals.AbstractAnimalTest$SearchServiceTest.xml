@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="animals.AbstractAnimalTest$SearchServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-31T20:51:04" hostname="nikitas-MacBook-Air.local" time="0.01">
+<testsuite name="app.animals.AbstractAnimalTest$SearchServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-31T20:51:04" hostname="nikitas-MacBook-Air.local" time="0.01">
   <properties/>
-  <testcase name="findOlderAnimal" classname="animals.AbstractAnimalTest$SearchServiceTest" time="0.01"/>
+  <testcase name="findOlderAnimal" classname="app.animals.AbstractAnimalTest$SearchServiceTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

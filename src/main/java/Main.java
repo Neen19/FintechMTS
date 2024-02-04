@@ -1,39 +1,30 @@
-import animals.AbstractAnimal;
-import animals.factories.PredatorAnimalFactory;
-import animals.service.CreateAnimalServiceImpl;
-import animals.service.SearchServiceImpl;
-
-import java.lang.reflect.InvocationTargetException;
+import app.animals.AbstractAnimal;
+import app.animals.service.interfaces.AnimalRepository;
+import config.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        SearchServiceImpl searchService = new SearchServiceImpl();
-        CreateAnimalServiceImpl createService = new CreateAnimalServiceImpl();
-        PredatorAnimalFactory predatorAnimalFactory = new PredatorAnimalFactory();
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnimalRepository rep = context.getBean(AnimalRepository.class);
+        System.out.println("FIND OLDER ANIMAL:\n");
 
-        AbstractAnimal[] animals = createService.genAnimals(predatorAnimalFactory);
-
-        for (AbstractAnimal animal : animals) {
-            System.out.println(animal + "\n");
-        }
-
-        System.out.println("FIND DUPLICATE RESULT");
-        searchService.findDuplicate(animals);
-
-        System.out.println("FIND OLDER ANIMAL RESULT");
-        AbstractAnimal[] findOlderAnimalResult = searchService.findOlderAnimal(animals, 10);
-        for (AbstractAnimal animal : findOlderAnimalResult) {
+        for (AbstractAnimal animal : rep.findOlderAnimal(2)) {
             if (animal == null) break;
-            System.out.println(animal + "\n");
+            System.out.println(animal);
         }
 
-        String[] findLeapYearAnimalsResult = searchService.findLeapYearNames(animals);
+        System.out.println("FIND LEAP YEAR NAMES:\n");
 
-        System.out.println("FIND LEAP ANIMALS RESULT");
-        for (String result : findLeapYearAnimalsResult) {
-            if (result == null) break;
-            System.out.println(result);
+        for (String name : rep.findLeapYearNames()) {
+            if (name == null) break;
+            System.out.println(name);
         }
+
+        System.out.println("FIND DUPLICATE:\n");
+
+        rep.printDuplicate();
+
     }
 }
 
