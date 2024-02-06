@@ -62,7 +62,7 @@ public class AbstractAnimalTest {
     @DisplayName("equals test for class AbstractAnimal and it hierarchy")
     class EqualsTest {
         @Test
-        @DisplayName("equals method on same object")
+        @DisplayName("equals method test")
         void testEquals() {
             assertEquals(TEST_SHARIK, TEST_SHARIK);
             assertNotEquals(TEST_SHARIK, TEST_BOBIK);
