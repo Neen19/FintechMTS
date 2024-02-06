@@ -12,91 +12,63 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractAnimalTest {
 
-    static Dog sharik;
-    static Dog sharikCopy;
-    static Dog jack;
-    static Dog bobik;
-    static Cat sharikCat;
+    final static Dog TEST_SHARIK = new Dog(
+            "Dog",
+            "Sharik",
+            10.12,
+            "soft",
+            LocalDate.of(2012, 6, 15)
+    );
+    static Dog TEST_SHARIK_COPY = new Dog(
+            "Dog",
+            "Sharik",
+            10.12,
+            "soft",
+            LocalDate.of(2012, 6, 15)
+    );
+    static Dog TEST_JACK = new Dog(
+            "Dog",
+            "Jack",
+            10.12,
+            "soft",
+            LocalDate.of(2006, 6, 15)
+    );
+    static Dog TEST_BOBIK = new Dog(
+            "Dog",
+            "Bobik",
+            10.12,
+            "soft",
+            LocalDate.of(2005, 6, 15)
+    );
+    static Cat TEST_SHARIK_CAT = new Cat(
+            "Dog",
+            "Sharik",
+            10.12,
+            "soft",
+            LocalDate.of(2012, 6, 15)
+    );
 
-    static AbstractAnimal[] animals;
+    static AbstractAnimal[] animals = new AbstractAnimal[]{
+            TEST_SHARIK,
+            TEST_SHARIK_COPY,
+            TEST_JACK,
+            TEST_BOBIK,
+            TEST_SHARIK_CAT
+    };
     static SearchService service = new SearchServiceImpl();
 
-    @BeforeAll
-    static void initAnimals() {
-        sharik = new Dog(
-                "Dog",
-                "Sharik",
-                10.12,
-                "soft",
-                LocalDate.of(2012, 6, 15)
-        );
-        jack = new Dog(
-                "Dog",
-                "Jack",
-                10.12,
-                "soft",
-                LocalDate.of(2006, 6, 15)
-        );
-        bobik = new Dog(
-                "Dog",
-                "Bobik",
-                10.12,
-                "soft",
-                LocalDate.of(2004, 6, 15)
-        );
-        sharikCopy = new Dog(
-                "Dog",
-                "Sharik",
-                10.12,
-                "soft",
-                LocalDate.of(2012, 6, 15)
-        );
-        sharikCat = new Cat(
-                "Dog",
-                "Sharik",
-                10.12,
-                "soft",
-                LocalDate.of(2012, 6, 15)
-        );
-        animals = new AbstractAnimal[5];
-        animals[0] = sharik;
-        animals[1] = sharikCopy;
-        animals[2] = jack;
-        animals[3] = bobik;
-        animals[4] = sharikCat;
-    }
 
     @Nested
     @DisplayName("equals test for class AbstractAnimal and it hierarchy")
     class EqualsTest {
         @Test
         @DisplayName("equals method on same object")
-        void sameEquals() {
-            assertEquals(sharik, sharik);
-        }
-
-        @Test
-        @DisplayName("equals method on the different object")
-        void diffEquals() {
-            assertNotEquals(sharik, bobik);
-        }
-
-        @Test
-        @DisplayName("equals method on the different class object with same fields")
-        void diffClassSameFieldsEquals() {
-            assertNotEquals(sharik, sharikCat);
-        }
-
-        @Test
-        @DisplayName("equals method on the different objects with same fields")
-        void diffObjSameFieldsEquals() {
-            assertEquals(sharik, sharikCopy);
-        }
-
-        @Test
-        @DisplayName("equals method on null")
-        void nullEquals() {
-            assertNotEquals(null, sharik);
+        void testEquals() {
+            assertEquals(TEST_SHARIK, TEST_SHARIK);
+            assertNotEquals(TEST_SHARIK, TEST_BOBIK);
+            assertNotEquals(TEST_SHARIK, TEST_SHARIK_CAT);
+            assertEquals(TEST_SHARIK, TEST_SHARIK_COPY);
+            assertNotEquals(null, TEST_SHARIK);
         }
     }
 
@@ -105,7 +77,7 @@ public class AbstractAnimalTest {
     class SearchServiceTest {
         @Test
         @DisplayName("findLeapYearNames")
-        void findLeapYearNames() {
+        void testFindLeapYearNames() {
             String[] names = service.findLeapYearNames(animals);
             for (int i = 0; i < 3; i++) {
                 assertEquals(names[i], "Sharik");
@@ -114,17 +86,17 @@ public class AbstractAnimalTest {
 
         @Test
         @DisplayName("findOlderAnimal")
-        void findOlderAnimal() {
+        void testFindOlderAnimal() {
             AbstractAnimal[] result = service.findOlderAnimal(animals, 17);
-            assertEquals(result[0], jack);
-            assertEquals(result[1], bobik);
+            assertEquals(result[0], TEST_JACK);
+            assertEquals(result[1], TEST_BOBIK);
         }
 
         @Test
         @DisplayName("findDuplicate")
-        void findDuplicate() {
+        void testFindDuplicate() {
             AbstractAnimal[] result = service.findDuplicate(animals);
-            assertEquals(result[0], sharik);
+            assertEquals(result[0], TEST_SHARIK);
         }
     }
 }
