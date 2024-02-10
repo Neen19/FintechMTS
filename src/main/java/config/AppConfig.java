@@ -1,14 +1,9 @@
 package config;
 
-import app.animals.AbstractAnimal;
-import app.animals.Animal;
-import app.animals.factories.AbstractAnimalFactory;
-import app.animals.factories.AnimalFactory;
-import app.animals.pets.Dog;
-import app.animals.service.implementation.CreateAnimalServiceImpl;
-import app.animals.service.interfaces.AnimalRepository;
 import bpp.AnimalTypeAnnotationPostProcessor;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 
 @ComponentScan("app")

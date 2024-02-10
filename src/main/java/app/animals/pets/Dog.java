@@ -4,8 +4,6 @@ import app.animals.enums.AnimalNames;
 import app.animals.enums.RandomEnumGenerator;
 import app.animals.enums.breeds.DogBreeds;
 import app.animals.utils.RandomUtils;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,6 @@
 package app.animals.service.interfaces;
 
 import app.animals.AbstractAnimal;
-import app.animals.factories.AbstractAnimalFactory;
 
 import java.lang.reflect.InvocationTargetException;
 

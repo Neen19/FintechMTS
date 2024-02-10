@@ -1,18 +1,13 @@
 package app.animals.service.implementation;
 
-import annotation.AnimalType;
 import app.animals.AbstractAnimal;
-import app.animals.pets.Dog;
 import app.animals.service.interfaces.AnimalRepository;
 import app.animals.service.interfaces.CreateAnimalService;
 import app.animals.utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.lang.annotation.Retention;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.HashSet;
