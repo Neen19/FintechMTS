@@ -38,4 +38,9 @@ public class RandomUtils {
         return LocalDate.of(year, month, day);
     }
 
+    public static<T> T getRandomFromArray(T[] array) {
+        int len = array.length;
+        return array[random.nextInt(len - 1)];
+    }
+
 }

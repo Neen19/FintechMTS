@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     AbstractAnimalFactory factory;
-    @AnimalType(type = Cat.class)
+    @AnimalType()
     private Class<? extends AbstractAnimal> animalType;
 
 
