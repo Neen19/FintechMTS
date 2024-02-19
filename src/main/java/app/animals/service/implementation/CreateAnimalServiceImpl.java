@@ -14,10 +14,8 @@ import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-@Service
-@Scope("prototype")
+
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-    @Autowired
     AbstractAnimalFactory factory;
     @AnimalType(type = Cat.class)
     private Class<? extends AbstractAnimal> animalType;

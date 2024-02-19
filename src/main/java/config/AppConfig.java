@@ -1,13 +1,15 @@
 package config;
 
+import app.animals.service.implementation.CreateAnimalServiceImpl;
+import app.animals.service.interfaces.CreateAnimalService;
 import bpp.AnimalTypeAnnotationPostProcessor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Service;
 
 
 @ComponentScan("app")
 @Configuration
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 
     @Bean
@@ -15,4 +17,9 @@ public class AppConfig {
         return new AnimalTypeAnnotationPostProcessor();
     }
 
+    @Bean
+    @Scope("prototype")
+    public CreateAnimalService createAnimalService() {
+        return new CreateAnimalServiceImpl();
+    }
 }

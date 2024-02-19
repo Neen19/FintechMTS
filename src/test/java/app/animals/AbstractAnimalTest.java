@@ -2,6 +2,7 @@ package app.animals;
 
 import app.animals.pets.Cat;
 import app.animals.pets.Dog;
+import app.animals.service.implementation.CreateAnimalServiceImpl;
 import app.animals.service.interfaces.AnimalRepository;
 import app.animals.service.implementation.AnimalRepositoryImpl;
 import org.junit.jupiter.api.*;
@@ -19,7 +20,7 @@ public class AbstractAnimalTest {
     static Cat sharikCat;
 
     static AbstractAnimal[] animals;
-    static AnimalRepository service = new AnimalRepositoryImpl();
+    static AnimalRepository service = new AnimalRepositoryImpl(new CreateAnimalServiceImpl());
 
     @BeforeAll
     static void initAnimals() {

@@ -17,9 +17,13 @@ import java.util.Set;
 public class AnimalRepositoryImpl implements AnimalRepository {
 
 
-    @Autowired
-    private CreateAnimalService service;
+    private final CreateAnimalService service;
     private AbstractAnimal[] animals;
+
+    @Autowired
+    public AnimalRepositoryImpl(CreateAnimalService service) {
+        this.service = service;
+    }
 
     @PostConstruct
     public void init() {
