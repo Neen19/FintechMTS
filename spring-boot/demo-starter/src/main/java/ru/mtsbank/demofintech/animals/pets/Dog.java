@@ -3,15 +3,14 @@ package ru.mtsbank.demofintech.animals.pets;
 import ru.mtsbank.demofintech.animals.enums.AnimalNames;
 import ru.mtsbank.demofintech.animals.enums.RandomEnumGenerator;
 import ru.mtsbank.demofintech.animals.enums.breeds.DogBreeds;
-import ru.mtsbank.demofintech.animals.utils.RandomUtils;
+import ru.mtsbank.demofintech.utils.RandomUtils;
 
 import java.time.LocalDate;
 
 public class Dog extends Pet {
-    public Dog() {
-        super(RandomUtils.genPrice());
+    public Dog(String name) {
+        super(name);
         this.breed = RandomEnumGenerator.getRandom(DogBreeds.class).toString();
-        this.name = RandomEnumGenerator.getRandom(AnimalNames.class).toString();
         this.character = "dog character";
     }
 

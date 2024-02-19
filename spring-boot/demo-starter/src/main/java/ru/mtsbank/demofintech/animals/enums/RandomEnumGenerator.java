@@ -1,7 +1,7 @@
 package ru.mtsbank.demofintech.animals.enums;
 
 
-import ru.mtsbank.demofintech.animals.utils.RandomUtils;
+import ru.mtsbank.demofintech.utils.RandomUtils;
 
 public class RandomEnumGenerator {
     public static <T extends Enum<?>> T getRandom(Class<T> enumClass) {

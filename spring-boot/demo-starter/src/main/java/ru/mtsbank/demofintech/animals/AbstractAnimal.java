@@ -1,7 +1,7 @@
 package ru.mtsbank.demofintech.animals;
 
-import ru.mtsbank.demofintech.animals.utils.DateFormatUtils;
-import ru.mtsbank.demofintech.animals.utils.RandomUtils;
+import ru.mtsbank.demofintech.utils.DateFormatUtils;
+import ru.mtsbank.demofintech.utils.RandomUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,9 +18,15 @@ public abstract class AbstractAnimal implements Animal {
 
     protected LocalDate birthDate;
 
-    protected AbstractAnimal(String cost) {
-        this.cost = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
+//    protected AbstractAnimal(String cost) {
+//        this.cost = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
+//        birthDate = RandomUtils.genRandomDate();
+//    }
+
+    protected AbstractAnimal(String name) {
+        this.name = name;
         birthDate = RandomUtils.genRandomDate();
+        this.cost = new BigDecimal(RandomUtils.genPrice()).setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override

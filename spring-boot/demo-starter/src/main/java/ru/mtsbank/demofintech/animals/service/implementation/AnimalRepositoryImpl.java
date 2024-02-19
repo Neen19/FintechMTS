@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 import ru.mtsbank.demofintech.animals.service.interfaces.AnimalRepository;
 import ru.mtsbank.demofintech.animals.service.interfaces.CreateAnimalService;
-import ru.mtsbank.demofintech.animals.utils.ValidationUtils;
+import ru.mtsbank.demofintech.utils.ValidationUtils;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +17,17 @@ import java.util.Set;
 public class AnimalRepositoryImpl implements AnimalRepository {
 
 
-    @Autowired
-    private CreateAnimalService service;
+    private  CreateAnimalService service;
     private AbstractAnimal[] animals;
+
+    public void setService(CreateAnimalService service) {
+        this.service = service;
+    }
+
+    @Autowired
+    public AnimalRepositoryImpl(CreateAnimalService service) {
+        this.service = service;
+    }
 
     @PostConstruct
     public void init() {
@@ -29,7 +37,6 @@ public class AnimalRepositoryImpl implements AnimalRepository {
                  IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("bean created");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ru.mtsbank.demofintech.animals.config;
+package ru.mtsbank.demofintech.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

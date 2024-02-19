@@ -1,15 +1,14 @@
-package ru.mtsbank.demofintech.animals.utils;
+package ru.mtsbank.demofintech.utils;
+
+import ru.mtsbank.demofintech.animals.AbstractAnimal;
+import ru.mtsbank.demofintech.animals.pets.Dog;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
 public class RandomUtils {
-    public static void main(String[] args) {
-        System.out.println(new BigDecimal(123.1).equals(new BigDecimal(123.1)));
-    }
     private static final Random random = new Random();
 
     public static String genPrice() {
@@ -20,13 +19,12 @@ public class RandomUtils {
         return random.nextInt(bound);
     }
 
-    public static <T>  T genRandomClass(List<Class<? extends T>> classes) throws
+    public static <T>  T genRandomClass(Class<? extends T> animalType, String[] names) throws
             NoSuchMethodException,
             InvocationTargetException,
             InstantiationException,
             IllegalAccessException {
-        int index = RandomUtils.genRandomInt(classes.size());
-        return classes.get(index).getDeclaredConstructor().newInstance();
+        return animalType.getDeclaredConstructor(String.class).newInstance(getRandomFromArray(names));
     }
 
     public static LocalDate genRandomDate() {
@@ -36,6 +34,12 @@ public class RandomUtils {
         int day = random.nextInt(maxDay) + 1;
 
         return LocalDate.of(year, month, day);
+    }
+
+
+    private static<T> T getRandomFromArray(T[] array) {
+        int len = array.length;
+        return array[random.nextInt(len - 1)];
     }
 
 }

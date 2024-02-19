@@ -1,20 +1,21 @@
 package ru.mtsbank.demofintech.animals.factories;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.utils.RandomUtils;
+import ru.mtsbank.demofintech.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
-@Component
-@Scope("prototype")
+
+
 public class AnimalFactory extends AbstractAnimalFactory {
-    final private List<Class<? extends AbstractAnimal>> ANIMAL_CLASSES;
 
-    public AnimalFactory(List<Class<? extends AbstractAnimal>> classes) {
-        ANIMAL_CLASSES = classes;
+
+    final private Class<? extends AbstractAnimal> ANIMAL_CLASS;
+    final private String[] animalNames;
+
+    public AnimalFactory(Class<? extends AbstractAnimal> animalType, String[] animalNames) {
+        ANIMAL_CLASS = animalType;
+        this.animalNames = animalNames;
     }
 
     public AbstractAnimal[] genArray(int size)
@@ -25,7 +26,7 @@ public class AnimalFactory extends AbstractAnimalFactory {
     {
         AbstractAnimal[] array = new AbstractAnimal[size];
         for (int i = 0; i < size; i++) {
-            array[i] = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASSES);
+            array[i] = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASS, animalNames);
         }
         return array;
     }

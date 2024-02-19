@@ -2,12 +2,15 @@ package ru.mtsbank.demofintech;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.config.AnimalStarterConfig;
+import ru.mtsbank.demofintech.config.AnimalStarterConfig;
 import ru.mtsbank.demofintech.animals.service.interfaces.AnimalRepository;
+
 
 public class Main {
     public static void main(String[] args) {
+
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AnimalStarterConfig.class);
+
         AnimalRepository rep = context.getBean(AnimalRepository.class);
         System.out.println("FIND OLDER ANIMAL:\n");
 

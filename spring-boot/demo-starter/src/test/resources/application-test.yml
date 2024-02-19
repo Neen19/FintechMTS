@@ -1,0 +1,9 @@
+animal:
+  cat:
+    names: murzik,barsik,pushok
+  dog:
+    names: sharik,bobik,jack
+  wolf:
+    names: geralt,bim,rex
+  shark:
+    names: mag,mako,lebron

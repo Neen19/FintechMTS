@@ -1,4 +1,4 @@
-package ru.mtsbank.demofintech.animals.utils;
+package ru.mtsbank.demofintech.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

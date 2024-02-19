@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Predator extends AbstractAnimal {
 
-    protected Predator(String cost) {
-        super(cost);
+    protected Predator(String name) {
+        super(name);
     }
 
     protected Predator(String breed, String name, double cost, String character, LocalDate birthDate) {
