@@ -56,10 +56,7 @@ public class AnimalRepositoryImpl implements AnimalRepository {
         AbstractAnimal[] answer = new AbstractAnimal[animals.length];
         int ind = 0;
         for (AbstractAnimal animal : animals) {
-            LocalDate animalBirth = animal.getBirthDate();
-            LocalDate now = LocalDate.now();
-            int animalAge = now.getYear() - animalBirth.getYear();
-            if (animalBirth.getMonthValue() > now.getMonthValue()) animalAge--;
+            int animalAge = animal.getAge();
             if (animalAge >= age) answer[ind++] = animal;
         }
         return answer;

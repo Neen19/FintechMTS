@@ -18,10 +18,7 @@ public abstract class AbstractAnimal implements Animal {
 
     protected LocalDate birthDate;
 
-//    protected AbstractAnimal(String cost) {
-//        this.cost = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
-//        birthDate = RandomUtils.genRandomDate();
-//    }
+
 
     protected AbstractAnimal(String name) {
         this.name = name;
@@ -88,4 +85,13 @@ public abstract class AbstractAnimal implements Animal {
                 other.birthDate.equals(this.birthDate)
         );
     }
+
+    public int getAge() {
+        LocalDate animalBirth = this.getBirthDate();
+        LocalDate now = LocalDate.now();
+        int animalAge = now.getYear() - animalBirth.getYear();
+        if (animalBirth.getMonthValue() > now.getMonthValue()) animalAge--;
+        return animalAge;
+    }
+
 }
