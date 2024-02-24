@@ -1,13 +1,9 @@
-application:
-  name: fintech-local
-  owner: Robert
-  greeter:
-    userName: Robert
-    morningMessage: Very good morning
-    afternoonMessage: Good afternoon
-    eveningMessage: Good evening
-    nightMessage: Good night
-app:
-  name: "Fintech"
-  value: "val"
-  colour: "Red"
+animal:
+  cat:
+    names: murzik,barsik,pushok
+  dog:
+    names: sharik,bobik,jack
+  wolf:
+    names: geralt,bim,rex
+  shark:
+    names: mag,mako,lebron

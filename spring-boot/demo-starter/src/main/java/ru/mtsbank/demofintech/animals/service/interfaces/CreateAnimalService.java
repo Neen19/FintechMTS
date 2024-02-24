@@ -3,6 +3,8 @@ package ru.mtsbank.demofintech.animals.service.interfaces;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
 
 public interface CreateAnimalService {
 
@@ -29,7 +31,7 @@ public interface CreateAnimalService {
      * @throws IllegalAccessException
      */
 
-    AbstractAnimal[] genAnimals()
+    public Map<String, List<AbstractAnimal>> genAnimals()
             throws InvocationTargetException,
             NoSuchMethodException,
             InstantiationException,

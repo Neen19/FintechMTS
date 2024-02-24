@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 import ru.mtsbank.demofintech.animals.factories.AbstractAnimalFactory;
@@ -17,9 +18,11 @@ import ru.mtsbank.demofintech.annotation.AnimalType;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-@Service
+@Component
 @Scope("prototype")
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
@@ -38,16 +41,32 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     @Value("${animal.wolf.names}")
     private String[] wolfNames;
 
+    public String[] getCatNames() {
+        return catNames;
+    }
+
+    public String[] getDogNames() {
+        return dogNames;
+    }
+
+    public String[] getSharkNames() {
+        return sharkNames;
+    }
+
+    public String[] getWolfNames() {
+        return wolfNames;
+    }
+
     @AnimalType()
     private Class<? extends AbstractAnimal> animalType;
 
 
-    public AbstractAnimal[] genAnimals(int N) throws
+    public Map<String, List<AbstractAnimal>> genAnimals(int N) throws
             InvocationTargetException,
             NoSuchMethodException,
             InstantiationException,
             IllegalAccessException {
-        return factory.genArray(N);
+        return factory.genAnimals(N);
     }
 
 
@@ -59,14 +78,15 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         else if (animalType.equals(Shark.class)) names = sharkNames;
         else names = wolfNames;
         factory = new AnimalFactory(animalType, names);
+        System.out.println(Arrays.toString(names));
     }
 
     @Override
-    public AbstractAnimal[] genAnimals()
+    public Map<String, List<AbstractAnimal>> genAnimals()
             throws InvocationTargetException,
             NoSuchMethodException,
             InstantiationException,
             IllegalAccessException {
-        return factory.genArray(10);
+        return factory.genAnimals(10);
     }
 }
