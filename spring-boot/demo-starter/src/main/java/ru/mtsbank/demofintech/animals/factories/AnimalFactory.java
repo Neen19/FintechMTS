@@ -1,6 +1,7 @@
 package ru.mtsbank.demofintech.animals.factories;
 
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
+import ru.mtsbank.demofintech.utils.MapUtils;
 import ru.mtsbank.demofintech.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,16 +30,10 @@ public class AnimalFactory extends AbstractAnimalFactory {
         Map<String, List<AbstractAnimal>> animals = new HashMap<>();
         for (int i = 0; i < size; i++) {
             AbstractAnimal animal = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASS, animalNames);
-            putInMap(animals, animal);
+            MapUtils.putInMap(animals, animal);
         }
         return animals;
     }
 
-    private <V> void putInMap(Map<String, List<V>> map, V elem) {
-        String key = elem.getClass().getName();
-        List<V> list = map.get(key);
-        if (list == null) map.put(key, List.of(elem));
-        else list.add(elem);
-    }
 
 }

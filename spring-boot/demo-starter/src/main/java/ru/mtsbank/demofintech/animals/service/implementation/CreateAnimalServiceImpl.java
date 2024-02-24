@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Service
 @Scope("prototype")
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
