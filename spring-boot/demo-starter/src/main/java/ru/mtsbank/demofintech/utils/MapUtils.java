@@ -10,6 +10,7 @@ public class MapUtils {
         List<V> list = map.get(key);
         if (list == null) {
             List<V> arrayList = new ArrayList<>();
+            arrayList.add(elem);
             map.put(key, arrayList);
         }
         else list.add(elem);

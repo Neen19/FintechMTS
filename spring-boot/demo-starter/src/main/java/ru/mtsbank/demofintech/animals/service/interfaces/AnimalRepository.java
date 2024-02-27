@@ -3,6 +3,7 @@ package ru.mtsbank.demofintech.animals.service.interfaces;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -31,4 +32,6 @@ public interface AnimalRepository {
     default void printDuplicate() {
         System.out.println(findDuplicate());
     }
+
+    public Map<String, List<AbstractAnimal>> getAnimals();
 }

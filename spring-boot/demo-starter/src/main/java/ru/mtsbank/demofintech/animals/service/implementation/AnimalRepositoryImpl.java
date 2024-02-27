@@ -26,6 +26,10 @@ public class AnimalRepositoryImpl implements AnimalRepository {
         this.service = service;
     }
 
+    public Map<String, List<AbstractAnimal>> getAnimals() {
+        return animals;
+    }
+
     @Autowired
     public AnimalRepositoryImpl(CreateAnimalService service) {
         this.service = service;
