@@ -1,9 +1,0 @@
-animal:
-  cat:
-    names: murzik-test,barsik-test,pushok-test
-  dog:
-    names: sharik-test,bobik-test,jack-test
-  wolf:
-    names: geralt-test,bim-test,rex-test
-  shark:
-    names: mag-test,mako-test,lebron-test

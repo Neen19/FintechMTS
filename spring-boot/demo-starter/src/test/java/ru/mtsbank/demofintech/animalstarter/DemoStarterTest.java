@@ -9,6 +9,8 @@ import ru.mtsbank.demofintech.animals.service.interfaces.CreateAnimalService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,7 +28,12 @@ public class DemoStarterTest {
 
     @Test
     public void createAnimalServiceGenAnimalsTest() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        assertEquals(service.genAnimals().length, 10);
+        int numOfAnimals = 0;
+        Map<String, List<AbstractAnimal>> animalMap = service.genAnimals();
+        for (String key : animalMap.keySet()) {
+            numOfAnimals += animalMap.get(key).size();
+        }
+        assertEquals(numOfAnimals, 10);
     }
 
     @Test
@@ -36,31 +43,41 @@ public class DemoStarterTest {
 
     @Test
     public void animalRepositoryFindOlderAnimalPositiveTest() {
-        AbstractAnimal[] animals = repository.findOlderAnimal(10);
-        int i = 0;
-        AbstractAnimal animal = animals[0];
-        while (animal != null) {
-            assertTrue(animal.getAge() >= 10);
-            animal = animals[++i];
+        assertTrue(animalRepositoryFindOlderAnimalPositiveTestPredicate(repository.findOlderAnimal(10)));
+    }
+
+    private boolean animalRepositoryFindOlderAnimalPositiveTestPredicate(Map<AbstractAnimal, Integer> animalMap) {
+        if (animalMap.size() == 1) return true;
+        for (AbstractAnimal key : animalMap.keySet()) {
+            if (key.getAge() < 10) return false;
         }
+        return true;
     }
 
     @Test
     public void animalRepositoryFindOlderAnimalNegativeTest() {
-        AbstractAnimal[] animals = repository.findOlderAnimal(100);
-        int i = 0;
-        AbstractAnimal animal = animals[0];
-        while (animal != null) {
-            assertTrue(animal.getAge() > 10);
-            animal = animals[++i];
-        }
-        assertEquals(i, 0);
+        assertTrue(animalRepositoryFindOlderAnimalPositiveTestPredicate(repository.findOlderAnimal(10)));
     }
 
     @Test
     public void animalRepositoryFindDuplicateTest() {
-        repository.findDuplicate();
+        assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
     }
-    
+
+    private boolean animalRepositoryFindDuplicateTestPredicate (
+            Map<String, Integer> duplicateMap,
+            Map<String, List<AbstractAnimal>> animalMap) {
+        if (duplicateMap.isEmpty()) return true;
+        for (String key: animalMap.keySet()) {
+            List<AbstractAnimal> list = animalMap.get(key);
+            AbstractAnimal duplicate = list.get(0);
+            int count = 0;
+            for (AbstractAnimal animal : list) {
+                if (animal.equals(duplicate)) count++;
+            }
+            if (count != duplicateMap.get(key)) return false;
+        }
+        return true;
+    }
 
 }

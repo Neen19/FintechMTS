@@ -27,11 +27,11 @@ public class SchedulerService {
         int num = RandomUtils.genRandomInt(3);
         switch (num) {
             case 0:
-                log.info("\nFIND LEAP YEAR NAMES\n" + Arrays.toString(repository.findLeapYearNames()));
+                log.info("\nFIND LEAP YEAR NAMES\n" + repository.findLeapYearNames());
             case 1:
                 log.info("\nFIND DUPLICATE\n" + repository.findDuplicate().toString());
             case 2:
-                log.info("\nFIND OLDER ANIMAL\n" + Arrays.toString(repository.findOlderAnimal(5)));
+                log.info("\nFIND OLDER ANIMAL\n" + repository.findOlderAnimal(5));
         }
     }
 }

@@ -15,7 +15,7 @@ public class Scheduler {
         this.service = service;
     }
 
-    @Scheduled(fixedDelay = 1000L * 60 )
+    @Scheduled(fixedDelay = 1000L )
     public void doWork() {
         service.doWork();
     }

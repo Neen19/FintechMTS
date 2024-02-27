@@ -1,10 +1,13 @@
 package ru.mtsbank.demofintech.animals.factories;
 
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
+import ru.mtsbank.demofintech.utils.MapUtils;
 import ru.mtsbank.demofintech.utils.RandomUtils;
 
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class AnimalFactory extends AbstractAnimalFactory {
@@ -18,16 +21,19 @@ public class AnimalFactory extends AbstractAnimalFactory {
         this.animalNames = animalNames;
     }
 
-    public AbstractAnimal[] genArray(int size)
+    public Map<String, List<AbstractAnimal>> genAnimals(int size)
             throws InvocationTargetException,
             NoSuchMethodException,
             InstantiationException,
             IllegalAccessException
     {
-        AbstractAnimal[] array = new AbstractAnimal[size];
+        Map<String, List<AbstractAnimal>> animals = new HashMap<>();
         for (int i = 0; i < size; i++) {
-            array[i] = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASS, animalNames);
+            AbstractAnimal animal = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASS, animalNames);
+            MapUtils.putInMap(animals, animal);
         }
-        return array;
+        return animals;
     }
+
+
 }
