@@ -1,4 +1,4 @@
-package ru.mtsbank.demofintech.animals.service.interfaces;
+package ru.mtsbank.demofintech.service.interfaces;
 
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 

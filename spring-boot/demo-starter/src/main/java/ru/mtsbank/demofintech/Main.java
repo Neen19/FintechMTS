@@ -1,14 +1,10 @@
 package ru.mtsbank.demofintech;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.service.implementation.CreateAnimalServiceImpl;
-import ru.mtsbank.demofintech.animals.service.interfaces.CreateAnimalService;
+import ru.mtsbank.demofintech.service.implementation.CreateAnimalServiceImpl;
 import ru.mtsbank.demofintech.config.AnimalStarterConfig;
-import ru.mtsbank.demofintech.animals.service.interfaces.AnimalRepository;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 
 
 public class Main {

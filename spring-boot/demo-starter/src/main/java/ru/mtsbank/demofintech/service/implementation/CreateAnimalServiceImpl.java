@@ -1,19 +1,14 @@
-package ru.mtsbank.demofintech.animals.service.implementation;
+package ru.mtsbank.demofintech.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.factories.AbstractAnimalFactory;
 import ru.mtsbank.demofintech.animals.factories.AnimalFactory;
 import ru.mtsbank.demofintech.animals.pets.Cat;
 import ru.mtsbank.demofintech.animals.pets.Dog;
 import ru.mtsbank.demofintech.animals.predators.Shark;
-import ru.mtsbank.demofintech.animals.service.interfaces.CreateAnimalService;
+import ru.mtsbank.demofintech.service.interfaces.CreateAnimalService;
 import ru.mtsbank.demofintech.annotation.AnimalType;
 
 import javax.annotation.PostConstruct;
