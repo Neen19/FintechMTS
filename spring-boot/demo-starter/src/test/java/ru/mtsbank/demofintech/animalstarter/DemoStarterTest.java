@@ -65,13 +65,13 @@ public class DemoStarterTest {
         assertTrue(animalRepositoryFindOlderAnimalPositiveTestPredicate(repository.findOlderAnimal(10)));
     }
 
-//    @Test
-//    public void animalRepositoryFindDuplicateTest() {
-//        assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
-//    }
+    @Test
+    public void animalRepositoryFindDuplicateTest() {
+        assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
+    }
 
     private boolean animalRepositoryFindDuplicateTestPredicate (
-            Map<String, Integer> duplicateMap,
+            Map<String, List<AbstractAnimal>> duplicateMap,
             Map<String, List<AbstractAnimal>> animalMap) {
         if (duplicateMap.isEmpty()) return true;
         for (String key: animalMap.keySet()) {
@@ -81,7 +81,7 @@ public class DemoStarterTest {
             for (AbstractAnimal animal : list) {
                 if (animal.equals(duplicate)) count++;
             }
-            if (count != duplicateMap.get(key)) return false;
+            if (count != duplicateMap.get(key).size()) return false;
         }
         return true;
     }
