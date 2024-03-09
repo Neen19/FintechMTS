@@ -81,8 +81,16 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     @Override
     public Map<String, List<AbstractAnimal>> findDuplicate() {
-        Set<AbstractAnimal> set = new HashSet<>();
-        return new HashMap<String, List<AbstractAnimal>>();
+        Map<AbstractAnimal, List<AbstractAnimal>> duplicatesMap = animals.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.groupingBy(animal -> animal));
+
+        return duplicatesMap.entrySet().stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getClass().getName(),
+                        Map.Entry::getValue
+                ));
     }
 
     @Override
