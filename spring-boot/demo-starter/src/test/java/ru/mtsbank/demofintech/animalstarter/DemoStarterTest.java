@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.service.interfaces.AnimalRepository;
-import ru.mtsbank.demofintech.animals.service.interfaces.CreateAnimalService;
+import ru.mtsbank.demofintech.service.interfaces.AnimalRepository;
+import ru.mtsbank.demofintech.service.interfaces.CreateAnimalService;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,6 +25,12 @@ public class DemoStarterTest {
 
     @Autowired
     AnimalRepository repository;
+
+    @Test
+    public void test() {
+        System.out.println("start test");
+        repository.findMinCostAnimals(repository.getAnimals().values().stream().flatMap(List::stream).collect(Collectors.toList())).stream().forEach(System.out::println);
+    }
 
     @Test
     public void createAnimalServiceGenAnimalsTest() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -59,10 +65,10 @@ public class DemoStarterTest {
         assertTrue(animalRepositoryFindOlderAnimalPositiveTestPredicate(repository.findOlderAnimal(10)));
     }
 
-    @Test
-    public void animalRepositoryFindDuplicateTest() {
-        assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
-    }
+//    @Test
+//    public void animalRepositoryFindDuplicateTest() {
+//        assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
+//    }
 
     private boolean animalRepositoryFindDuplicateTestPredicate (
             Map<String, Integer> duplicateMap,

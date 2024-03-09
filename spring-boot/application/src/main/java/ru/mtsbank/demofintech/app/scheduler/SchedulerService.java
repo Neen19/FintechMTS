@@ -5,10 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mtsbank.demofintech.animals.service.interfaces.AnimalRepository;
+import ru.mtsbank.demofintech.service.interfaces.AnimalRepository;
 import ru.mtsbank.demofintech.utils.RandomUtils;
-
-import java.util.Arrays;
 
 @Service
 public class SchedulerService {
