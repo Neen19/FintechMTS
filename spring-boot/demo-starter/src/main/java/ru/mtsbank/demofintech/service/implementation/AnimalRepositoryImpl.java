@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
 import ru.mtsbank.demofintech.exception.IllegalAgeException;
 import ru.mtsbank.demofintech.exception.IllegalInstanceException;
+import ru.mtsbank.demofintech.exception.IllegalSizeException;
 import ru.mtsbank.demofintech.service.interfaces.AnimalRepository;
 import ru.mtsbank.demofintech.service.interfaces.CreateAnimalService;
 import ru.mtsbank.demofintech.utils.ValidationUtils;
@@ -128,7 +129,10 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     }
 
     @Override
-    public List<String> findMinCostAnimals(List<AbstractAnimal> animals) {
+    public List<String> findMinCostAnimals(List<AbstractAnimal> animals) throws IllegalSizeException {
+
+        if (animals.isEmpty()) throw new IllegalSizeException("Empty list");
+
         return animals.stream()
                 .sorted(Comparator.comparingInt(AbstractAnimal::getAge))
                 .limit(3)

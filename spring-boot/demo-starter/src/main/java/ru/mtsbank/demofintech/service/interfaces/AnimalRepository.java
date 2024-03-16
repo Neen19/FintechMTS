@@ -1,6 +1,7 @@
 package ru.mtsbank.demofintech.service.interfaces;
 
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
+import ru.mtsbank.demofintech.exception.IllegalSizeException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,7 +46,7 @@ public interface AnimalRepository {
 
     List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animals);
 
-    List<String> findMinCostAnimals(List<AbstractAnimal> animals);
+    List<String> findMinCostAnimals(List<AbstractAnimal> animals) throws IllegalSizeException;
 
 
 }

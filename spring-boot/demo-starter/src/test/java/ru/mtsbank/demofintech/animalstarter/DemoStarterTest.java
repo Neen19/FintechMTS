@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
+import ru.mtsbank.demofintech.exception.IllegalSizeException;
 import ru.mtsbank.demofintech.service.interfaces.AnimalRepository;
 import ru.mtsbank.demofintech.service.interfaces.CreateAnimalService;
 
@@ -26,11 +27,6 @@ public class DemoStarterTest {
     @Autowired
     AnimalRepository repository;
 
-    @Test
-    public void test() {
-        System.out.println("start test");
-        repository.findMinCostAnimals(repository.getAnimals().values().stream().flatMap(List::stream).collect(Collectors.toList())).stream().forEach(System.out::println);
-    }
 
     @Test
     public void createAnimalServiceGenAnimalsTest() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -70,11 +66,11 @@ public class DemoStarterTest {
         assertTrue(animalRepositoryFindDuplicateTestPredicate(repository.findDuplicate(), repository.getAnimals()));
     }
 
-    private boolean animalRepositoryFindDuplicateTestPredicate (
+    private boolean animalRepositoryFindDuplicateTestPredicate(
             Map<String, List<AbstractAnimal>> duplicateMap,
             Map<String, List<AbstractAnimal>> animalMap) {
         if (duplicateMap.isEmpty()) return true;
-        for (String key: animalMap.keySet()) {
+        for (String key : animalMap.keySet()) {
             List<AbstractAnimal> list = animalMap.get(key);
             AbstractAnimal duplicate = list.get(0);
             int count = 0;
