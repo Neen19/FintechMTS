@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Scheduler {
 
-    private SchedulerService service;
+    private final SchedulerService service;
 
     @Autowired
     public Scheduler(SchedulerService service) {
@@ -17,7 +17,12 @@ public class Scheduler {
 
     @Scheduled(fixedDelay = 1000L )
     public void doWork() {
-        service.doWork();
+        try {
+            service.doWork();
+        } catch (Throwable th) {
+            System.out.println(th);
+        }
+
     }
 }
 

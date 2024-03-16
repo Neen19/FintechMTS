@@ -3,7 +3,8 @@ package ru.mtsbank.demofintech.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mtsbank.demofintech.animals.AbstractAnimal;
-import ru.mtsbank.demofintech.animals.pets.Dog;
+import ru.mtsbank.demofintech.exception.IllegalAgeException;
+import ru.mtsbank.demofintech.exception.IllegalInstanceException;
 import ru.mtsbank.demofintech.service.interfaces.AnimalRepository;
 import ru.mtsbank.demofintech.service.interfaces.CreateAnimalService;
 import ru.mtsbank.demofintech.utils.ValidationUtils;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class AnimalRepositoryImpl implements AnimalRepository {
 
 
-    private CreateAnimalService service;
+    private final CreateAnimalService service;
     private Map<String, List<AbstractAnimal>> animals;
 
 
@@ -46,33 +47,45 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     public Map<String, LocalDate> findLeapYearNames() {
 
         return animals.values().stream()
-                .filter(ValidationUtils::validateAnimal)
+                .peek(it -> {
+                    if (!ValidationUtils.validateListOfClass(it, AbstractAnimal.class))
+                        throw new IllegalInstanceException("List contains not Animal class");
+                })
                 .flatMap(List::stream)
                 .filter(animal -> animal.getBirthDate().isLeapYear())
                 .collect(Collectors.toMap(
                         animal -> animal.getClass().getName() + " " + animal.getName(),
-                        AbstractAnimal::getBirthDate
+                        AbstractAnimal::getBirthDate,
+                        (r1, r2) -> r1
                 ));
     }
 
     @Override
     public Map<AbstractAnimal, Integer> findOlderAnimal(int age) {
 
+        if (age < 0) throw new IllegalAgeException("Age less than 0");
+
         Map<AbstractAnimal, Integer> map = animals.values().stream()
-                .filter(ValidationUtils::validateAnimal)
+                .peek(it -> {
+                    if (!ValidationUtils.validateListOfClass(it, AbstractAnimal.class))
+                        throw new IllegalInstanceException("List contains not Animal class");
+                })
                 .flatMap(List::stream)
                 .filter(animal -> animal.getAge() >= age)
                 .collect(Collectors.toMap(
                         animal -> animal,
-                        AbstractAnimal::getAge
+                        AbstractAnimal::getAge,
+                        (r1, r2) -> r1
                 ));
+
         if (map.isEmpty()) {
             return animals.values().stream()
                     .flatMap(List::stream)
                     .max(Comparator.comparingInt(AbstractAnimal::getAge))
                     .stream().collect(Collectors.toMap(
                             animal -> animal,
-                            AbstractAnimal::getAge
+                            AbstractAnimal::getAge,
+                            (r1, r2) -> r1
                     ));
         }
         return map;
@@ -89,7 +102,8 @@ public class AnimalRepositoryImpl implements AnimalRepository {
                 .filter(entry -> entry.getValue().size() > 1)
                 .collect(Collectors.toMap(
                         entry -> entry.getKey().getClass().getName(),
-                        Map.Entry::getValue
+                        Map.Entry::getValue,
+                        (r1, r2) -> r1
                 ));
     }
 
