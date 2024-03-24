@@ -29,7 +29,6 @@ public class Scheduler {
         } catch (IllegalAgeException e) {
             System.out.println("IllegalAgeException " + e.getMessage());
         }
-
     }
 }
 

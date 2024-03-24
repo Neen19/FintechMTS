@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class AnimalFactory extends AbstractAnimalFactory {
@@ -27,7 +28,7 @@ public class AnimalFactory extends AbstractAnimalFactory {
             InstantiationException,
             IllegalAccessException
     {
-        Map<String, List<AbstractAnimal>> animals = new HashMap<>();
+        Map<String, List<AbstractAnimal>> animals = new ConcurrentHashMap<>();
         for (int i = 0; i < size; i++) {
             AbstractAnimal animal = RandomUtils.<AbstractAnimal>genRandomClass(ANIMAL_CLASS, animalNames);
             MapUtils.putInMap(animals, animal);

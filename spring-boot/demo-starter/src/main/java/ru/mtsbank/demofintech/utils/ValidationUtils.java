@@ -1,7 +1,5 @@
 package ru.mtsbank.demofintech.utils;
 
-import ru.mtsbank.demofintech.animals.AbstractAnimal;
-
 import java.util.List;
 
 public class ValidationUtils {

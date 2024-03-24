@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 
@@ -54,7 +55,7 @@ public class AnimalRepositoryImpl implements AnimalRepository {
                 })
                 .flatMap(List::stream)
                 .filter(animal -> animal.getBirthDate().isLeapYear())
-                .collect(Collectors.toMap(
+                .collect(Collectors.toConcurrentMap(
                         animal -> animal.getClass().getName() + " " + animal.getName(),
                         AbstractAnimal::getBirthDate,
                         (r1, r2) -> r1
@@ -73,7 +74,7 @@ public class AnimalRepositoryImpl implements AnimalRepository {
                 })
                 .flatMap(List::stream)
                 .filter(animal -> animal.getAge() >= age)
-                .collect(Collectors.toMap(
+                .collect(Collectors.toConcurrentMap(
                         animal -> animal,
                         AbstractAnimal::getAge,
                         (r1, r2) -> r1
@@ -83,7 +84,7 @@ public class AnimalRepositoryImpl implements AnimalRepository {
             return animals.values().stream()
                     .flatMap(List::stream)
                     .max(Comparator.comparingInt(AbstractAnimal::getAge))
-                    .stream().collect(Collectors.toMap(
+                    .stream().collect(Collectors.toConcurrentMap(
                             animal -> animal,
                             AbstractAnimal::getAge,
                             (r1, r2) -> r1
@@ -95,13 +96,14 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     @Override
     public Map<String, List<AbstractAnimal>> findDuplicate() {
+
         Map<AbstractAnimal, List<AbstractAnimal>> duplicatesMap = animals.values().stream()
                 .flatMap(List::stream)
-                .collect(Collectors.groupingBy(animal -> animal));
+                .collect(Collectors.groupingByConcurrent(animal -> animal));
 
         return duplicatesMap.entrySet().stream()
                 .filter(entry -> entry.getValue().size() > 1)
-                .collect(Collectors.toMap(
+                .collect(Collectors.toConcurrentMap(
                         entry -> entry.getKey().getClass().getName(),
                         Map.Entry::getValue,
                         (r1, r2) -> r1
@@ -117,15 +119,17 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     @Override
     public List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animals) {
+
         OptionalDouble averageCostOpt = animals.stream()
                 .mapToDouble(animal -> animal.getCost().doubleValue())
                 .average();
         double averageCost = averageCostOpt.getAsDouble();
+
         return animals.stream()
                 .filter(animal -> animal.getAge() > OLD_AGE)
                 .filter(animal -> animal.getCost().doubleValue() > averageCost)
                 .sorted(Comparator.comparingInt(AbstractAnimal::getAge))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
     @Override
@@ -138,6 +142,6 @@ public class AnimalRepositoryImpl implements AnimalRepository {
                 .limit(3)
                 .map(AbstractAnimal::getName)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 }
